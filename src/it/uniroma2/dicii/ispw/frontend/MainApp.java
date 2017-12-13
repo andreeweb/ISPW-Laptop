@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
+
 import java.io.IOException;
 
 public class MainApp extends Application {
@@ -21,25 +23,26 @@ public class MainApp extends Application {
         this.primaryStage.getIcons().add(new Image("file:resources/images/elephant-128.png"));
 
         initRootLayout();
-
         showLoginView();
+
     }
 
     /**
      * Initializes the root layout.
      */
     public void initRootLayout() {
+
         try {
+
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootView.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            loader.setLocation(MainApp.class.getResource("RootView.fxml"));
+            rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-            //primaryStage.setResizable(false);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,28 +50,53 @@ public class MainApp extends Application {
     }
 
     /**
-     * Shows the person overview inside the root layout.
+     * Shows the login view inside the root layout.
      */
     public void showLoginView() {
+
         try {
+
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/LoginView.fxml"));
-            BorderPane loginView = (BorderPane) loader.load();
+            loader.setLocation(MainApp.class.getResource("LoginView.fxml"));
+            BorderPane loginView = loader.load();
 
-            // Set person overview into the center of root layout.
+            // Set view into the center of root layout.
             rootLayout.setCenter(loginView);
+
+            // Give the controller access to the main app.
+            LoginViewController controller = loader.getController();
+            controller.setMainApp(this);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Returns the main stage.
-     * @return
+     * Shows the main view inside the root layout.
      */
-    public Stage getPrimaryStage() {
-        return primaryStage;
+    public void showMainView() {
+
+        try {
+
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("MainView.fxml"));
+            BorderPane mainView = loader.load();
+
+            // Set view into the center of root layout.
+            rootLayout.setCenter(mainView);
+
+            // Give the controller access to the main app.
+            MainViewController controller = loader.getController();
+            controller.setMainApp(this);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

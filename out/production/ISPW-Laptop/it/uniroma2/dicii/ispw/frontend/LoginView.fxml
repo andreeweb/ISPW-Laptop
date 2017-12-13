@@ -8,12 +8,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="file:/Users/andrea/Sviluppo/ISPW/ISPW-Laptop/resources/stylesheets/BlueTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="file:/Users/andrea/Sviluppo/ISPW/ISPW-Laptop/resources/stylesheets/BlueTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.frontend.LoginViewController">
    <top>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="150.0" BorderPane.alignment="CENTER" />
    </top>
    <center>
-      <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" orientation="VERTICAL" BorderPane.alignment="CENTER">
+      <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,7 +39,7 @@
                   <Insets top="25.0" />
                </FlowPane.margin>
             </PasswordField>
-            <Button mnemonicParsing="false" prefWidth="300.0" styleClass="button-blue" text="Accedi">
+            <Button fx:id="loginButton" mnemonicParsing="false" prefWidth="300.0" styleClass="button-blue" text="Accedi">
                <FlowPane.margin>
                   <Insets top="25.0" />
                </FlowPane.margin>

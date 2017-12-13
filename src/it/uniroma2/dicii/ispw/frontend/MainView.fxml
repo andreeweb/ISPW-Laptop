@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="file:/Users/andrea/Sviluppo/ISPW/ISPW-Laptop/resources/stylesheets/BlueTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="file:/Users/andrea/Sviluppo/ISPW/ISPW-Laptop/resources/stylesheets/BlueTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.frontend.MainViewController">
    <top>
       <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" styleClass="pane-header" BorderPane.alignment="CENTER">
          <children>
@@ -37,7 +37,7 @@
                   </ToolBar>
                   <ToolBar nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1">
                     <items>
-                      <Button mnemonicParsing="false" styleClass="button-white" text="Esci" />
+                      <Button fx:id="exitButton" mnemonicParsing="false" styleClass="button-white" text="Esci" />
                     </items>
                      <opaqueInsets>
                         <Insets />
