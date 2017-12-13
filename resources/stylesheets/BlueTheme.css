@@ -63,3 +63,49 @@
 .button-casper:pressed, .button-casper:default:hover:pressed {
     -fx-text-fill: #0C3869;
 }
+
+/*
+ * White style Push Button
+ */
+.button-white {
+    -fx-padding: 5 22 5 22;
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Arial";
+    -fx-font-size: 11pt;
+    -fx-text-fill: #0C3869;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button-white:hover {
+    -fx-background-color: #0C3869;
+    -fx-text-fill: #ffffff;
+}
+
+.button-white:pressed, .button-white:default:hover:pressed {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #0C3869;
+}
+
+/*
+ * White labels
+ */
+.white-label-big {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #ffffff;
+}
+
+.white-label-sub {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #ffffff;
+}
+
+/*
+ * Header
+ */
+
+.pane-header {
+    -fx-background-color: #0C3869;
+    -fx-base : #0C3869;
+}
