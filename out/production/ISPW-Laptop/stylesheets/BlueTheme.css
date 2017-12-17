@@ -3,6 +3,15 @@
 }
 
 /*
+ * Red error labels
+ */
+.error-label-sub {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #ff0015;
+}
+
+/*
  * Blue labels
  */
 .label-big {
