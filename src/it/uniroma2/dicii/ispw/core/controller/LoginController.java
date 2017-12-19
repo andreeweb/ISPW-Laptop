@@ -8,10 +8,20 @@ import it.uniroma2.dicii.ispw.core.dao.UserDaoFactory;
 import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
 import it.uniroma2.dicii.ispw.utils.Sha;
 
+/**
+ * Controller class for Login Use Case
+ *
+ * @author Andrea Cerra
+ */
+
 public class LoginController {
 
     private UserDao userDao;
 
+    /**
+     *
+     * @return
+     */
     private UserDao getUserDao(){
 
         UserDaoFactory factory = new UserDaoFactory();
@@ -27,13 +37,17 @@ public class LoginController {
 
     }
 
+    /**
+     * Passing a UserBean, this method takes care of
+     * validating the username and password received from the boundary.
+     *
+     * @param userBean user bean which contains username and password received from the boundary
+     * @return boolean value, true if user have valid login credentials.
+     */
     public boolean validateLogin(UserBean userBean){
 
         boolean isValidUser;
-
-        User user = new User();
-        user.setUsername(userBean.getUsername());
-        user.setPassword(Sha.sha256(userBean.getPassword()));
+        User user;
 
         try {
 

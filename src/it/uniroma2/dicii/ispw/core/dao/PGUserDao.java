@@ -3,8 +3,15 @@ package it.uniroma2.dicii.ispw.core.dao;
 import it.uniroma2.dicii.ispw.core.interfaces.UserDao;
 import it.uniroma2.dicii.ispw.core.model.User;
 import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
-
 import java.sql.*;
+
+/**
+ * Concrete implementation of UserDao interfaces
+ * this implementation works with PostgreSQL database.
+ *
+ * @author Andrea Cerra
+ *
+ */
 
 public class PGUserDao implements UserDao {
 
@@ -51,7 +58,7 @@ public class PGUserDao implements UserDao {
             user.setName(rs.getString("name"));
             user.setSurname(rs.getString("surname"));
             user.setUsername(rs.getString("username"));
-            user.setPassword("");
+            //user.setPassword("");
 
             // Clean-up
             rs.close();

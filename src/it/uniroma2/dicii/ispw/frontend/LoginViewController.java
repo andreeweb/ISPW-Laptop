@@ -1,12 +1,17 @@
 package it.uniroma2.dicii.ispw.frontend;
 
-import it.uniroma2.dicii.ispw.MainApp;
 import it.uniroma2.dicii.ispw.core.view.UserLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+/**
+ * JavaFX Controller class for LoginViewController.fxml
+ *
+ * @author Andrea Cerra
+ */
 
 public class LoginViewController {
 
@@ -32,7 +37,11 @@ public class LoginViewController {
         errorLabel.setManaged(false);
     }
 
-    // Login button
+    /**
+     * Login button action
+     *
+     * @param event JavaFX event
+     */
     private void loginButtonAction(ActionEvent event) {
 
         boolean validLogin;

@@ -1,22 +1,28 @@
 package it.uniroma2.dicii.ispw.frontend;
 
-import it.uniroma2.dicii.ispw.MainApp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-
 import java.io.IOException;
+
+/**
+ * Class responsible for managing scene change methods.
+ * Implemented as a Singleton.
+ *
+ * @author Andrea Cerra
+ */
 
 public class SceneManager {
 
-    // Reference to the root layout.
+    /**
+     * Reference to rootLayout
+     */
     private BorderPane rootLayout;
 
     /**
      *
      * The inner-class LazyCointainer is loaded only at the first invocation of getInstance.
      * This activity results "thread-safe".
-     * @author gulyx, andreeweb
+     * @author gulyx
      *
      */
     private static class LazyCointainer{
@@ -24,6 +30,7 @@ public class SceneManager {
     }
 
     protected SceneManager() {
+
     }
 
     public static final SceneManager getSingletonInstance() {
@@ -33,7 +40,7 @@ public class SceneManager {
     /**
      * Is called by the main application to give a reference back to itself.
      *
-     * @param rootLayout
+     * @param rootLayout reference to root layout
      */
     public void setRootLayout(BorderPane rootLayout) {
         this.rootLayout = rootLayout;
@@ -41,6 +48,7 @@ public class SceneManager {
 
     /**
      * Shows the login view inside the root layout.
+     *
      */
     public void showLoginView() {
 
@@ -61,6 +69,7 @@ public class SceneManager {
 
     /**
      * Shows the main view inside the root layout.
+     *
      */
     public void showMainView() {
 

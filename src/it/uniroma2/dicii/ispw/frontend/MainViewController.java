@@ -5,6 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+/**
+ * JavaFX Controller class for MainView.fxml
+ *
+ * @author Andrea Cerra
+ */
+
 public class MainViewController {
 
     // Reference to the main application.
@@ -20,7 +26,11 @@ public class MainViewController {
         exitButton.setOnAction(this::exitButtonAction);
     }
 
-    // Login button
+    /**
+     * Exit/logout button action
+     *
+     * @param event JavaFX event
+     */
     private void exitButtonAction(ActionEvent event) {
 
         SceneManager sm = SceneManager.getSingletonInstance();
