@@ -1,18 +1,19 @@
-package it.uniroma2.dicii.ispw.core.exception;
+package it.uniroma2.dicii.ispw.exception;
 
 /**
- * DAO Exception for UserDao
+ * Database Exception
+ * wrong type, connection error, credential error ecc..
  *
  * @author Andrea Cerra
  */
 
-public class UserDaoException extends Exception{
+public class DatabaseException extends Exception{
 
     /**
      *
      * @param message Exception message
      */
-    public UserDaoException(String message) {
+    public DatabaseException(String message) {
         super(message);
     }
 
@@ -21,7 +22,7 @@ public class UserDaoException extends Exception{
      * @param message Exception message
      * @param cause Throwable cause
      */
-    public UserDaoException(String message, Throwable cause) {
+    public DatabaseException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -29,7 +30,7 @@ public class UserDaoException extends Exception{
      *
      * @param cause Throwable cause
      */
-    public UserDaoException(Throwable cause) {
+    public DatabaseException(Throwable cause) {
         super(cause);
     }
 }

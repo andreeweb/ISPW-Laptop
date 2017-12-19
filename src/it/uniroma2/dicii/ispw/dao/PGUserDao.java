@@ -1,8 +1,8 @@
-package it.uniroma2.dicii.ispw.core.dao;
+package it.uniroma2.dicii.ispw.dao;
 
-import it.uniroma2.dicii.ispw.core.interfaces.UserDao;
-import it.uniroma2.dicii.ispw.core.model.User;
-import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.interfaces.UserDao;
+import it.uniroma2.dicii.ispw.model.User;
+import it.uniroma2.dicii.ispw.exception.UserDaoException;
 import java.sql.*;
 
 /**

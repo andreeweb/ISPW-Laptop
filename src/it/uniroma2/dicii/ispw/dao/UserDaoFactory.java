@@ -1,7 +1,7 @@
-package it.uniroma2.dicii.ispw.core.dao;
+package it.uniroma2.dicii.ispw.dao;
 
-import it.uniroma2.dicii.ispw.core.exception.DatabaseException;
-import it.uniroma2.dicii.ispw.core.interfaces.UserDao;
+import it.uniroma2.dicii.ispw.exception.DatabaseException;
+import it.uniroma2.dicii.ispw.interfaces.UserDao;
 
 /**
  * Factory class for Data Access Object class

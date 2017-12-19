@@ -1,8 +1,6 @@
 package it.uniroma2.dicii.ispw;
 
-import it.uniroma2.dicii.ispw.frontend.LoginViewController;
-import it.uniroma2.dicii.ispw.frontend.MainViewController;
-import it.uniroma2.dicii.ispw.frontend.SceneManager;
+import it.uniroma2.dicii.ispw.view.SceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,9 +17,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        Stage primaryStage1 = primaryStage;
-        primaryStage1.setTitle("Elephant");
-        primaryStage1.getIcons().add(new Image("file:resources/images/elephant-128.png"));
+        primaryStage.setTitle("Elephant");
+        primaryStage.getIcons().add(new Image("file:resources/images/elephant-128.png"));
 
         // init with root layout
 
@@ -29,7 +26,7 @@ public class MainApp extends Application {
 
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("frontend/RootView.fxml"));
+            loader.setLocation(this.getClass().getResource("view/RootView.fxml"));
             rootLayout = loader.load();
 
             // Show the scene containing the root layout.

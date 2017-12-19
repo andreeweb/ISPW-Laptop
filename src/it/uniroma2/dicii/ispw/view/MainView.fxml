@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="file:/Users/andrea/Sviluppo/ISPW/ISPW-Laptop/resources/stylesheets/BlueTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.frontend.MainViewController">
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="file:/Users/andrea/Sviluppo/ISPW/ISPW-Laptop/resources/stylesheets/BlueTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.view.MainViewController">
    <top>
       <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" styleClass="pane-header" BorderPane.alignment="CENTER">
          <children>

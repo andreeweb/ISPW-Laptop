@@ -1,8 +1,9 @@
-package it.uniroma2.dicii.ispw.frontend;
+package it.uniroma2.dicii.ispw.view;
 
-import it.uniroma2.dicii.ispw.core.exception.DatabaseException;
-import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
-import it.uniroma2.dicii.ispw.core.view.UserLogin;
+import it.uniroma2.dicii.ispw.controller.LoginController;
+import it.uniroma2.dicii.ispw.exception.DatabaseException;
+import it.uniroma2.dicii.ispw.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.model.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
- * JavaFX Controller class for LoginViewController.fxml
+ * Boundary class for Login Use Case
+ * JavaFX (controller) class for LoginViewController.fxml
  *
  * @author Andrea Cerra
  */
@@ -46,11 +48,12 @@ public class LoginViewController {
      */
     private void loginButtonAction(ActionEvent event) {
 
-        UserLogin ul = new UserLogin();
+        UserBean user = new UserBean(usernameText.getText(), passwordText.getText());
 
         try {
 
-            ul.login(usernameText.getText(), passwordText.getText());
+            LoginController controller = new LoginController();
+            controller.validateLogin(user);
 
             SceneManager sm = SceneManager.getSingletonInstance();
             sm.showMainView();

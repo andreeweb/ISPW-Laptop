@@ -1,7 +1,7 @@
-package it.uniroma2.dicii.ispw.core.interfaces;
+package it.uniroma2.dicii.ispw.interfaces;
 
-import it.uniroma2.dicii.ispw.core.model.User;
-import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.model.User;
+import it.uniroma2.dicii.ispw.exception.UserDaoException;
 
 /**
  * Interface DAO for entity User

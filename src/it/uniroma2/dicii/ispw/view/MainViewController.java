@@ -1,4 +1,4 @@
-package it.uniroma2.dicii.ispw.frontend;
+package it.uniroma2.dicii.ispw.view;
 
 import it.uniroma2.dicii.ispw.MainApp;
 import javafx.event.ActionEvent;
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 /**
- * JavaFX Controller class for MainView.fxml
+ * JavaFX (controller) class for MainView.fxml
  *
  * @author Andrea Cerra
  */

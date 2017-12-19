@@ -1,4 +1,4 @@
-package it.uniroma2.dicii.ispw.frontend;
+package it.uniroma2.dicii.ispw.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;

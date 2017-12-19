@@ -1,4 +1,4 @@
-package it.uniroma2.dicii.ispw.core.model;
+package it.uniroma2.dicii.ispw.model;
 
 /**
  * Class for entity Secretary
