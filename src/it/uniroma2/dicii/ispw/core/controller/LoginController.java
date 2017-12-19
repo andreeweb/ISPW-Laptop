@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.core.controller;
 
+import it.uniroma2.dicii.ispw.core.exception.DatabaseException;
 import it.uniroma2.dicii.ispw.core.interfaces.UserDao;
 import it.uniroma2.dicii.ispw.core.model.User;
 import it.uniroma2.dicii.ispw.core.model.UserBean;
@@ -16,53 +17,20 @@ import it.uniroma2.dicii.ispw.utils.Sha;
 
 public class LoginController {
 
-    private UserDao userDao;
-
-    /**
-     *
-     * @return
-     */
-    private UserDao getUserDao(){
-
-        UserDaoFactory factory = new UserDaoFactory();
-
-        try{
-            this.userDao = factory.getUserDAO(Persistence.PostgreSQL);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return userDao;
-
-    }
-
     /**
      * Passing a UserBean, this method takes care of
      * validating the username and password received from the boundary.
      *
      * @param userBean user bean which contains username and password received from the boundary
-     * @return boolean value, true if user have valid login credentials.
+     * @throws DatabaseException error with database connection or wrong type in config
+     * @throws UserDaoException error in user search
      */
-    public boolean validateLogin(UserBean userBean){
+    public void validateLogin(UserBean userBean) throws UserDaoException, DatabaseException {
 
-        boolean isValidUser;
-        User user;
+        UserDao dao = UserDaoFactory.getSingletonInstance().getUserDAO(Persistence.MSSQL);
+        User user = dao.getUserByUsernameAndPassword(userBean.getUsername(), Sha.sha256(userBean.getPassword()));
 
-        try {
+        System.out.println("User Login: " + user.toString());
 
-            UserDao dao = this.getUserDao();
-            user = dao.getUserByUsernameAndPassword(userBean.getUsername(), Sha.sha256(userBean.getPassword()));
-            System.out.println("User Login: " + user.toString());
-            isValidUser = true;
-
-        } catch (UserDaoException userNotFound) {
-
-            userNotFound.printStackTrace();
-            isValidUser = false;
-
-        }
-
-        return isValidUser;
     }
 }

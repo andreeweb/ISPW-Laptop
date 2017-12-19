@@ -1,8 +1,8 @@
 package it.uniroma2.dicii.ispw.core.view;
 
-// boundary class per UC Login
-
 import it.uniroma2.dicii.ispw.core.controller.LoginController;
+import it.uniroma2.dicii.ispw.core.exception.DatabaseException;
+import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
 import it.uniroma2.dicii.ispw.core.model.UserBean;
 
 /**
@@ -14,19 +14,18 @@ import it.uniroma2.dicii.ispw.core.model.UserBean;
 public class UserLogin {
 
     /**
-     * Exit/logout button action
      *
      * @param username username string from the view controller
      * @param password password string from the view controller
-     * @return true is login credentials are valid, false otherwhise
+     * @throws DatabaseException error with database connection or wrong type in config
+     * @throws UserDaoException error in user search
      */
-    public boolean login(String username, String password){
+    public void login(String username, String password) throws DatabaseException, UserDaoException {
 
         UserBean user = new UserBean(username, password);
 
         LoginController controller = new LoginController();
         controller.validateLogin(user);
 
-        return controller.validateLogin(user);
     }
 }

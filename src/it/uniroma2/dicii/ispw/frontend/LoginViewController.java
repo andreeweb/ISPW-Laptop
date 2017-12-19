@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw.frontend;
 
+import it.uniroma2.dicii.ispw.core.exception.DatabaseException;
+import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
 import it.uniroma2.dicii.ispw.core.view.UserLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,21 +46,27 @@ public class LoginViewController {
      */
     private void loginButtonAction(ActionEvent event) {
 
-        boolean validLogin;
-
         UserLogin ul = new UserLogin();
-        validLogin = ul.login(usernameText.getText(), passwordText.getText());
 
-        if (validLogin){
+        try {
+
+            ul.login(usernameText.getText(), passwordText.getText());
 
             SceneManager sm = SceneManager.getSingletonInstance();
             sm.showMainView();
 
-        }else{
+        } catch (DatabaseException e) {
 
             errorLabel.setManaged(true);
-        }
+            errorLabel.setText("Errore di connessione al database.");
+            e.printStackTrace();
 
+        } catch (UserDaoException e) {
+
+            errorLabel.setManaged(true);
+            errorLabel.setText("Username e/o password errati.");
+            e.printStackTrace();
+        }
 
     }
 }
