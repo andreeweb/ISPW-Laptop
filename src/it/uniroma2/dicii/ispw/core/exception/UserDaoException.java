@@ -1,4 +1,4 @@
-package it.uniroma2.dicii.ispw.exception;
+package it.uniroma2.dicii.ispw.core.exception;
 
 public class UserDaoException extends Exception{
 

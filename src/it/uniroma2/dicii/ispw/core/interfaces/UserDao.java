@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.core.interfaces;
 
 import it.uniroma2.dicii.ispw.core.model.User;
-import it.uniroma2.dicii.ispw.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
 
 public interface UserDao {
 

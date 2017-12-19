@@ -3,9 +3,9 @@ package it.uniroma2.dicii.ispw.core.controller;
 import it.uniroma2.dicii.ispw.core.interfaces.UserDao;
 import it.uniroma2.dicii.ispw.core.model.User;
 import it.uniroma2.dicii.ispw.core.model.UserBean;
-import it.uniroma2.dicii.ispw.dao.Persistence;
-import it.uniroma2.dicii.ispw.dao.UserDaoFactory;
-import it.uniroma2.dicii.ispw.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.core.dao.Persistence;
+import it.uniroma2.dicii.ispw.core.dao.UserDaoFactory;
+import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
 import it.uniroma2.dicii.ispw.utils.Sha;
 
 public class LoginController {

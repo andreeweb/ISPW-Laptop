@@ -1,9 +1,6 @@
-package it.uniroma2.dicii.ispw.dao;
+package it.uniroma2.dicii.ispw.core.dao;
 
 import it.uniroma2.dicii.ispw.core.interfaces.UserDao;
-import it.uniroma2.dicii.ispw.dao.db.MySqlUserDao;
-import it.uniroma2.dicii.ispw.dao.db.PGUserDao;
-import it.uniroma2.dicii.ispw.dao.file.FileUserDao;
 
 public class UserDaoFactory {
 

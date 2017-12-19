@@ -1,8 +1,8 @@
-package it.uniroma2.dicii.ispw.dao.db;
+package it.uniroma2.dicii.ispw.core.dao;
 
 import it.uniroma2.dicii.ispw.core.interfaces.UserDao;
 import it.uniroma2.dicii.ispw.core.model.User;
-import it.uniroma2.dicii.ispw.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.core.exception.UserDaoException;
 
 public class MySqlUserDao implements UserDao {
 
