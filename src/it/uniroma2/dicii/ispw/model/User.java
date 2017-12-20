@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw.model;
 
+import it.uniroma2.dicii.ispw.enumeration.Role;
+
 /**
  * Class for entity User
  *
@@ -10,6 +12,7 @@ public class User {
     private String username;
     private String name;
     private String surname;
+    private Role role;
 
     //private String password;
 
@@ -61,6 +64,23 @@ public class User {
         this.surname = surname;
     }
 
+    /**
+     *
+     * @return enumeration
+     * @see Role
+     */
+    public Role getRole() {
+        return role;
+    }
+
+    /**
+     *
+     * @param role new role for user
+     * @see Role
+     */
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     /**
      *

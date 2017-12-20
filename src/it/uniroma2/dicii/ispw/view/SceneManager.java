@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.view;
 
+import it.uniroma2.dicii.ispw.bean.UserBean;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
@@ -56,14 +57,15 @@ public class SceneManager {
 
             // Load login view
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("LoginView.fxml"));
-            BorderPane loginView = loader.load();
+            loader.setLocation(getClass().getResource("LoginView.fxml"));
+            BorderPane view = loader.load();
 
             // Set view into the center of root layout.
-            rootLayout.setCenter(loginView);
+            rootLayout.setCenter(view);
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(1);
         }
     }
 
@@ -71,20 +73,24 @@ public class SceneManager {
      * Shows the main view inside the root layout.
      *
      */
-    public void showMainView() {
+    public void showSecretaryView(UserBean userBean) {
 
         try {
 
             // Load main view
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("MainView.fxml"));
-            BorderPane mainView = loader.load();
+            loader.setLocation(getClass().getResource("SecretaryView.fxml"));
+            BorderPane view = (BorderPane)loader.load();
 
             // Set view into the center of root layout.
-            rootLayout.setCenter(mainView);
+            rootLayout.setCenter(view);
+
+            SecretaryViewController controller = loader.getController();
+            controller.setUserBean(userBean);
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(1);
         }
     }
 

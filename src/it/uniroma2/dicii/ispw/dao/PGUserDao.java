@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.dao;
 
+import it.uniroma2.dicii.ispw.enumeration.Role;
 import it.uniroma2.dicii.ispw.interfaces.UserDao;
 import it.uniroma2.dicii.ispw.model.User;
 import it.uniroma2.dicii.ispw.exception.UserDaoException;
@@ -58,6 +59,7 @@ public class PGUserDao implements UserDao {
             user.setName(rs.getString("name"));
             user.setSurname(rs.getString("surname"));
             user.setUsername(rs.getString("username"));
+            user.setRole(Role.SECRETARY); // todo hard coded, set in db
             //user.setPassword("");
 
             // Clean-up

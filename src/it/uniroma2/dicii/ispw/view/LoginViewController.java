@@ -3,7 +3,7 @@ package it.uniroma2.dicii.ispw.view;
 import it.uniroma2.dicii.ispw.controller.LoginController;
 import it.uniroma2.dicii.ispw.exception.DatabaseException;
 import it.uniroma2.dicii.ispw.exception.UserDaoException;
-import it.uniroma2.dicii.ispw.model.UserBean;
+import it.uniroma2.dicii.ispw.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,13 +20,13 @@ import javafx.scene.control.TextField;
 public class LoginViewController {
 
     @FXML
-    public TextField passwordText;
+    private TextField passwordText;
 
     @FXML
-    public TextField usernameText;
+    private TextField usernameText;
 
     @FXML
-    public Label errorLabel;
+    private Label errorLabel;
 
     @FXML
     private Button loginButton;
@@ -48,15 +48,21 @@ public class LoginViewController {
      */
     private void loginButtonAction(ActionEvent event) {
 
-        UserBean user = new UserBean(usernameText.getText(), passwordText.getText());
+        UserBean userBean = new UserBean(usernameText.getText(), passwordText.getText());
 
         try {
 
             LoginController controller = new LoginController();
-            controller.validateLogin(user);
+            userBean = controller.validateLogin(userBean);
 
-            SceneManager sm = SceneManager.getSingletonInstance();
-            sm.showMainView();
+            switch (userBean.getRole()){
+
+                case SECRETARY:
+                    SceneManager.getSingletonInstance().showSecretaryView(userBean);
+                    break;
+                case TECHNICIAN:
+                    break;
+            }
 
         } catch (DatabaseException e) {
 

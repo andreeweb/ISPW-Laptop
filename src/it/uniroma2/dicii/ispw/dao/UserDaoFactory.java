@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.dao;
 
+import it.uniroma2.dicii.ispw.enumeration.Persistence;
 import it.uniroma2.dicii.ispw.exception.DatabaseException;
 import it.uniroma2.dicii.ispw.interfaces.UserDao;
 
