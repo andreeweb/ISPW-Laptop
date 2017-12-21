@@ -86,7 +86,7 @@ public class SceneManager {
             rootLayout.setCenter(view);
 
             SecretaryViewController controller = loader.getController();
-            controller.setUserBean(userBean);
+            controller.onCreateView(userBean);
 
         } catch (IOException e) {
             e.printStackTrace();

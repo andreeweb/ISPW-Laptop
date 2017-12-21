@@ -1,26 +1,67 @@
 package it.uniroma2.dicii.ispw.model;
 
+import it.uniroma2.dicii.ispw.enumeration.IssueState;
+
+/**
+ * Class for entity Issue
+ *
+ * @author Andrea Cerra
+ */
 public class Issue {
 
-    private String name;
+    private Integer issueId;
     private String description;
-    private String state;
+    private IssueState state;
+    private String date;
 
-    public Issue(String name, String description, String state) {
-        this.name = name;
-        this.description = description;
-        this.state = state;
-    }
+    private Feature feature;
+    private Classroom classroom;
 
-    public String getName() {
-        return name;
+    public Integer getId() {
+        return issueId;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getState() {
+    public IssueState getState() {
         return state;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public Feature getFeature() {
+        return feature;
+    }
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setId(Integer issueId) {
+        this.issueId = issueId;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setState(IssueState state) {
+        this.state = state;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setFeature(Feature feature) {
+        this.feature = feature;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 }

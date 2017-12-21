@@ -20,7 +20,7 @@ public class MainApp extends Application {
         primaryStage.setTitle("Elephant");
         primaryStage.getIcons().add(new Image("file:resources/images/elephant-128.png"));
 
-        // init with root layout
+        // onCreateView with root layout
 
         try {
 

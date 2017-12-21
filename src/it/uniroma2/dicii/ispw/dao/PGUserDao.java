@@ -1,9 +1,9 @@
 package it.uniroma2.dicii.ispw.dao;
 
-import it.uniroma2.dicii.ispw.enumeration.Role;
+import it.uniroma2.dicii.ispw.enumeration.UserRole;
 import it.uniroma2.dicii.ispw.interfaces.UserDao;
 import it.uniroma2.dicii.ispw.model.User;
-import it.uniroma2.dicii.ispw.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.exception.DaoException;
 import java.sql.*;
 
 /**
@@ -18,10 +18,10 @@ public class PGUserDao implements UserDao {
 
     private String USER = "ispw";
     private String PASS = "ispw";
-    private String DB_URL = "jdbc:postgresql://localhost/ispw";
+    private String DB_URL = "jdbc:postgresql://localhost/ispw_a";
     private String DRIVER_CLASS_NAME = "org.postgresql.Driver";
 
-    public User getUserByUsernameAndPassword(String username, String password) throws UserDaoException {
+    public User getUserByUsernameAndPassword(String username, String password) throws DaoException {
 
         Statement stmt = null;
         Connection conn = null;
@@ -37,19 +37,19 @@ public class PGUserDao implements UserDao {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             // query
-            String sql = "SELECT * " + "FROM users where username = '" + username + "' AND password = '" + password + "';";
+            String sql = "SELECT * " + "FROM system_user where username = '" + username + "' AND password = '" + password + "';";
 
             // execute
             ResultSet rs = stmt.executeQuery(sql);
 
             // rs not empty
             if (!rs.first())
-                throw new UserDaoException("User not found");
+                throw new DaoException("User not found");
 
             // ops..
             boolean moreThanOne = rs.first() && rs.next();
             if (moreThanOne)
-                throw new UserDaoException("Multiple user in DB with same credentials");
+                throw new DaoException("Multiple user in DB with same credentials");
 
             // set cursor
             rs.first();
@@ -59,7 +59,7 @@ public class PGUserDao implements UserDao {
             user.setName(rs.getString("name"));
             user.setSurname(rs.getString("surname"));
             user.setUsername(rs.getString("username"));
-            user.setRole(Role.SECRETARY); // todo hard coded, set in db
+            user.setUserRole(UserRole.valueOf(rs.getString("role"))); // todo by name
             //user.setPassword("");
 
             // Clean-up
@@ -74,7 +74,7 @@ public class PGUserDao implements UserDao {
             System.exit(1);
 
         } catch (SQLException e) {
-            throw new UserDaoException(e.getMessage());
+            throw new DaoException(e.getMessage());
 
         } finally {
 
@@ -87,7 +87,7 @@ public class PGUserDao implements UserDao {
                     conn.close();
 
             } catch (SQLException e) {
-                throw new UserDaoException(e.getMessage());
+                throw new DaoException(e.getMessage());
             }
         }
 

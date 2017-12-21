@@ -6,13 +6,13 @@ package it.uniroma2.dicii.ispw.exception;
  * @author Andrea Cerra
  */
 
-public class UserDaoException extends Exception{
+public class DaoException extends Exception{
 
     /**
      *
      * @param message Exception message
      */
-    public UserDaoException(String message) {
+    public DaoException(String message) {
         super(message);
     }
 
@@ -21,7 +21,7 @@ public class UserDaoException extends Exception{
      * @param message Exception message
      * @param cause Throwable cause
      */
-    public UserDaoException(String message, Throwable cause) {
+    public DaoException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -29,7 +29,7 @@ public class UserDaoException extends Exception{
      *
      * @param cause Throwable cause
      */
-    public UserDaoException(Throwable cause) {
+    public DaoException(Throwable cause) {
         super(cause);
     }
 }

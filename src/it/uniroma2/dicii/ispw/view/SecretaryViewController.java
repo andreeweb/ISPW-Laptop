@@ -1,6 +1,9 @@
 package it.uniroma2.dicii.ispw.view;
 
+import it.uniroma2.dicii.ispw.bean.IssueBean;
 import it.uniroma2.dicii.ispw.bean.UserBean;
+import it.uniroma2.dicii.ispw.controller.IssueManagementController;
+import it.uniroma2.dicii.ispw.exception.DaoException;
 import it.uniroma2.dicii.ispw.model.Issue;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -11,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import java.util.List;
 
 /**
  * JavaFX (controller) class for SecretaryView.fxml
@@ -29,13 +34,24 @@ public class SecretaryViewController {
     private Button exitButton;
 
     @FXML
-    private TableView<Issue> issueTableView;
-    @FXML
-    private TableColumn<Issue, String> issueName;
-    @FXML
-    private TableColumn<Issue, String> issueDescription;
+    private TableView<IssueBean> issueTableView;
 
-    private ObservableList<Issue> issueData = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<IssueBean, String> idColumn;
+
+    @FXML
+    private TableColumn<IssueBean, String> featureColumn;
+
+    @FXML
+    private TableColumn<IssueBean, String> descriptionColumn;
+
+    @FXML
+    private TableColumn<IssueBean, String> stateColumn;
+
+    @FXML
+    private TableColumn<IssueBean, String> classroomColumn;
+
+    private ObservableList<IssueBean> issueData = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -44,7 +60,7 @@ public class SecretaryViewController {
         exitButton.setOnAction(this::exitButtonAction);
 
         // Listen for selection changes and show the person details when changed.
-        issueTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showIssueDetails(newValue));
+        //issueTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showIssueDetails(newValue));
     }
 
     private void showIssueDetails(Issue issue) {
@@ -56,44 +72,30 @@ public class SecretaryViewController {
      *
      * @param userBean userBean
      */
-    public void setUserBean(UserBean userBean) {
+    public void onCreateView(UserBean userBean) {
 
+        // set user name on the top of the view
         this.userBean = userBean;
         nameLabel.setText("Benvenuto " + userBean.getName());
 
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 2", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto3","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
-        issueData.add(new Issue("Guasto1","Guasto alla lavagna in aula 1", "Confermato"));
+        IssueManagementController controller = new IssueManagementController();
 
-        issueTableView.setItems(issueData);
+        try {
 
-        issueName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        issueDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+            List<IssueBean> list = controller.getIssueBeanList();
+            issueData.addAll(list);
+            issueTableView.setItems(issueData);
+
+        } catch (DaoException e) {
+            e.printStackTrace();
+            // todo no data available
+        }
+
+        idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId().toString()));
+        featureColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFeature().getName()));
+        descriptionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+        stateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getState().toString()));
+        classroomColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getClassroom().getName()));
 
     }
 

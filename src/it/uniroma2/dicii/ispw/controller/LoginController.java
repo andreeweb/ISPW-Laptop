@@ -5,8 +5,8 @@ import it.uniroma2.dicii.ispw.interfaces.UserDao;
 import it.uniroma2.dicii.ispw.model.User;
 import it.uniroma2.dicii.ispw.bean.UserBean;
 import it.uniroma2.dicii.ispw.enumeration.Persistence;
-import it.uniroma2.dicii.ispw.dao.UserDaoFactory;
-import it.uniroma2.dicii.ispw.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.dao.DaoFactory;
+import it.uniroma2.dicii.ispw.exception.DaoException;
 import it.uniroma2.dicii.ispw.utils.Sha;
 
 /**
@@ -17,8 +17,6 @@ import it.uniroma2.dicii.ispw.utils.Sha;
 
 public class LoginController {
 
-    private User user;
-
     // todo questo controller non fa la new dell'user, rivedere diagramma classi con associazione
 
     /**
@@ -26,19 +24,18 @@ public class LoginController {
      * validating the username and password received from the boundary.
      *
      * @param userBean user bean which contains username and password received from the boundary
-     * @throws DatabaseException error with database connection or wrong type in config
-     * @throws UserDaoException error in user search
+     * @throws DaoException error in user search
      */
-    public UserBean validateLogin(UserBean userBean) throws UserDaoException, DatabaseException {
+    public UserBean validateLogin(UserBean userBean) throws DaoException {
 
-        UserDao dao = UserDaoFactory.getSingletonInstance().getUserDAO(Persistence.PostgreSQL);
-        user = dao.getUserByUsernameAndPassword(userBean.getUsername(), Sha.sha256(userBean.getPassword()));
+        UserDao dao = DaoFactory.getSingletonInstance().getUserDAO(Persistence.PostgreSQL);
+        User user = dao.getUserByUsernameAndPassword(userBean.getUsername(), Sha.sha256(userBean.getPassword()));
 
-        userBean.setRole(user.getRole());
+        userBean.setUserRole(user.getUserRole());
         userBean.setName(user.getName());
         userBean.setSurname(user.getSurname());
 
-        System.out.println("User Login: " + user.toString());
+        System.out.println("User Login: " + user.toString() + " " + user.getUserRole());
 
         return userBean;
     }

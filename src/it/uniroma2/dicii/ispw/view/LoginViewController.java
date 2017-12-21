@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.view;
 
 import it.uniroma2.dicii.ispw.controller.LoginController;
 import it.uniroma2.dicii.ispw.exception.DatabaseException;
-import it.uniroma2.dicii.ispw.exception.UserDaoException;
+import it.uniroma2.dicii.ispw.exception.DaoException;
 import it.uniroma2.dicii.ispw.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +55,7 @@ public class LoginViewController {
             LoginController controller = new LoginController();
             userBean = controller.validateLogin(userBean);
 
-            switch (userBean.getRole()){
+            switch (userBean.getUserRole()){
 
                 case SECRETARY:
                     SceneManager.getSingletonInstance().showSecretaryView(userBean);
@@ -64,13 +64,7 @@ public class LoginViewController {
                     break;
             }
 
-        } catch (DatabaseException e) {
-
-            errorLabel.setManaged(true);
-            errorLabel.setText("Errore di connessione al database.");
-            e.printStackTrace();
-
-        } catch (UserDaoException e) {
+        } catch (DaoException e) {
 
             errorLabel.setManaged(true);
             errorLabel.setText("Username e/o password errati.");

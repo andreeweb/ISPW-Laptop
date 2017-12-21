@@ -1,6 +1,6 @@
 package it.uniroma2.dicii.ispw.bean;
 
-import it.uniroma2.dicii.ispw.enumeration.Role;
+import it.uniroma2.dicii.ispw.enumeration.UserRole;
 
 /**
  * Bean class for entity User
@@ -14,7 +14,7 @@ public class UserBean {
     private String surname;
     private String username;
     private String password;
-    private Role role;
+    private UserRole userRole;
 
     public UserBean(String username, String password) {
         this.username = username;
@@ -88,18 +88,18 @@ public class UserBean {
     /**
      *
      * @return enumeration
-     * @see Role
+     * @see UserRole
      */
-    public Role getRole() {
-        return role;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
     /**
      *
-     * @param role new role for user bean
-     * @see Role
+     * @param userRole new userRole for user bean
+     * @see UserRole
      */
-    public void setRole(Role role) {
-        this.role = role;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }
