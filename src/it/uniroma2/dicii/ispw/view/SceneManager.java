@@ -139,9 +139,6 @@ public class SceneManager {
             SecretaryViewDetailController controller = loader.getController();
             controller.onCreateView(issueBean);
 
-            rootController.setVisibleExitButton(false);
-            rootController.setVisibleNameLabel(false);
-
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);

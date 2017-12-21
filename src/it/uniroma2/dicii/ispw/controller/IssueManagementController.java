@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.bean.ClassroomBean;
 import it.uniroma2.dicii.ispw.bean.FeatureBean;
 import it.uniroma2.dicii.ispw.bean.IssueBean;
 import it.uniroma2.dicii.ispw.dao.DaoFactory;
+import it.uniroma2.dicii.ispw.enumeration.IssueState;
 import it.uniroma2.dicii.ispw.enumeration.Persistence;
 import it.uniroma2.dicii.ispw.exception.DaoException;
 import it.uniroma2.dicii.ispw.interfaces.IssueDao;
@@ -51,6 +52,13 @@ public class IssueManagementController {
         }
         
         return beanList;
+
+    }
+
+    public List<IssueState> getIssueStateList() throws DaoException {
+
+        IssueDao dao = DaoFactory.getSingletonInstance().getIssueDAO(Persistence.PostgreSQL);
+        return dao.getIssueStates();
 
     }
 }

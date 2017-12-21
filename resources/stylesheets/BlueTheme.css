@@ -26,6 +26,12 @@
     -fx-text-fill: #0C3869;
 }
 
+.label-mid {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #0C3869;
+}
+
 /*
  * Blue text field
  */
@@ -51,6 +57,26 @@
 
 .button-blue:pressed, .button-blue:default:hover:pressed {
     -fx-background-color: #0C3869;
+}
+
+/*
+ * Red style Push Button
+ */
+.button-red {
+    -fx-padding: 5 22 5 22;
+    -fx-background-color: #ff0015;
+    -fx-font-family: "Arial";
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button-red:hover {
+    -fx-background-color: #ff4e61;
+}
+
+.button-red:pressed, .button-red:default:hover:pressed {
+    -fx-background-color: #ff0015;
 }
 
 /*

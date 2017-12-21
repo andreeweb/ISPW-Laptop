@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.interfaces;
 
+import it.uniroma2.dicii.ispw.enumeration.IssueState;
 import it.uniroma2.dicii.ispw.exception.DaoException;
 import it.uniroma2.dicii.ispw.model.Issue;
 
@@ -19,4 +20,11 @@ public interface IssueDao {
      * @return array
      */
     List<Issue> getIssues() throws DaoException;
+
+    /**
+     *
+     * @return array
+     * @throws DaoException
+     */
+    List<IssueState> getIssueStates() throws DaoException;
 }
