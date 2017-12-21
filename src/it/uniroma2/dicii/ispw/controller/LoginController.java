@@ -28,7 +28,7 @@ public class LoginController {
      */
     public UserBean validateLogin(UserBean userBean) throws DaoException {
 
-        UserDao dao = DaoFactory.getSingletonInstance().getUserDAO(Persistence.PostgreSQL);
+        UserDao dao = DaoFactory.getSingletonInstance().getUserDAO(Persistence.File);
         User user = dao.getUserByUsernameAndPassword(userBean.getUsername(), Sha.sha256(userBean.getPassword()));
 
         userBean.setUserRole(user.getUserRole());

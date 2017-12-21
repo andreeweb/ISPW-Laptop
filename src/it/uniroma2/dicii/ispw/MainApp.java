@@ -1,8 +1,6 @@
 package it.uniroma2.dicii.ispw;
 
-import it.uniroma2.dicii.ispw.view.RootViewController;
 import it.uniroma2.dicii.ispw.view.SceneManager;
-import it.uniroma2.dicii.ispw.view.SecretaryViewDetailController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,8 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainApp extends Application {
-
-    private BorderPane rootLayout;
 
     @Override
     public void start(Stage primaryStage) {
@@ -29,7 +25,7 @@ public class MainApp extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(this.getClass().getResource("view/RootView.fxml"));
-            rootLayout = loader.load();
+            BorderPane rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -48,7 +44,7 @@ public class MainApp extends Application {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         launch(args);
     }
 }

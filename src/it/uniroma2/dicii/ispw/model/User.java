@@ -2,19 +2,20 @@ package it.uniroma2.dicii.ispw.model;
 
 import it.uniroma2.dicii.ispw.enumeration.UserRole;
 
+import java.io.Serializable;
+
 /**
  * Class for entity User
  *
  * @author Andrea Cerra
  */
-public class User {
+public class User implements Serializable{
 
     private String username;
     private String name;
     private String surname;
     private UserRole userRole;
-
-    //private String password;
+    private String password;
 
     /**
      *
@@ -38,6 +39,14 @@ public class User {
      */
     public String getSurname() {
         return surname;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getPassword() {
+        return password;
     }
 
     /**
@@ -80,6 +89,14 @@ public class User {
      */
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    /**
+     *
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
