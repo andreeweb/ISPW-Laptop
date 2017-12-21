@@ -1,7 +1,9 @@
 package it.uniroma2.dicii.ispw.view;
 
+import it.uniroma2.dicii.ispw.bean.IssueBean;
 import it.uniroma2.dicii.ispw.bean.UserBean;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
@@ -18,6 +20,7 @@ public class SceneManager {
      * Reference to rootLayout
      */
     private BorderPane rootLayout;
+    private RootViewController rootController;
 
     /**
      *
@@ -39,12 +42,30 @@ public class SceneManager {
     }
 
     /**
-     * Is called by the main application to give a reference back to itself.
+     * Is called by the main application
      *
      * @param rootLayout reference to root layout
      */
     public void setRootLayout(BorderPane rootLayout) {
         this.rootLayout = rootLayout;
+    }
+
+    /**
+     * Is called by the main application
+     *
+     * @param rootController reference to root layout
+     */
+    public void setRootController(RootViewController rootController) {
+        this.rootController = rootController;
+    }
+
+    /**
+     * Called when MainApp start stage
+     *
+     */
+    public void init(){
+
+        this.showLoginView();
     }
 
     /**
@@ -63,6 +84,9 @@ public class SceneManager {
             // Set view into the center of root layout.
             rootLayout.setCenter(view);
 
+            rootController.setVisibleExitButton(false);
+            rootController.setVisibleNameLabel(false);
+
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -73,7 +97,7 @@ public class SceneManager {
      * Shows the main view inside the root layout.
      *
      */
-    public void showSecretaryView(UserBean userBean) {
+    public void showSecretaryView() {
 
         try {
 
@@ -84,9 +108,39 @@ public class SceneManager {
 
             // Set view into the center of root layout.
             rootLayout.setCenter(view);
+            rootController.setVisibleExitButton(true);
+            rootController.setVisibleNameLabel(true);
 
             SecretaryViewController controller = loader.getController();
-            controller.onCreateView(userBean);
+            controller.onCreateView();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Shows the main view inside the root layout.
+     *
+     */
+    public void showSecretaryDetailView(IssueBean issueBean) {
+
+        try {
+
+            // Load main view
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("SecretaryViewDetail.fxml"));
+            BorderPane view = (BorderPane)loader.load();
+
+            // Set view into the center of root layout.
+            rootLayout.setCenter(view);
+
+            SecretaryViewDetailController controller = loader.getController();
+            controller.onCreateView(issueBean);
+
+            rootController.setVisibleExitButton(false);
+            rootController.setVisibleNameLabel(false);
 
         } catch (IOException e) {
             e.printStackTrace();

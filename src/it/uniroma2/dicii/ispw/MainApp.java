@@ -1,6 +1,8 @@
 package it.uniroma2.dicii.ispw;
 
+import it.uniroma2.dicii.ispw.view.RootViewController;
 import it.uniroma2.dicii.ispw.view.SceneManager;
+import it.uniroma2.dicii.ispw.view.SecretaryViewDetailController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,17 +36,16 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
+            // call SceneManager
+            SceneManager sm = SceneManager.getSingletonInstance();
+            sm.setRootLayout(rootLayout);
+            sm.setRootController(loader.getController());
+            sm.init();
+
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
-
-        // call SceneManager
-        SceneManager sm = SceneManager.getSingletonInstance();
-        sm.setRootLayout(rootLayout);
-
-        // show login view
-        sm.showLoginView();
     }
 
     public static void main(String[] args) {

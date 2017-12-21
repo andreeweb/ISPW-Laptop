@@ -15,11 +15,6 @@
    <center>
       <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:/Users/andrea/Sviluppo/ISPW/ISPW-Laptop/resources/images/elephant-128.png" />
-               </image>
-            </ImageView>
             <Label styleClass="label-big" text="Benvenuto nell'app Gestione Eventi Elephant">
                <padding>
                   <Insets top="15.0" />

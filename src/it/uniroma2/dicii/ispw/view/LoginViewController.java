@@ -58,7 +58,7 @@ public class LoginViewController {
             switch (userBean.getUserRole()){
 
                 case SECRETARY:
-                    SceneManager.getSingletonInstance().showSecretaryView(userBean);
+                    SceneManager.getSingletonInstance().showSecretaryView();
                     break;
                 case TECHNICIAN:
                     break;

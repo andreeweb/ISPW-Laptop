@@ -8,10 +8,7 @@ import it.uniroma2.dicii.ispw.model.Issue;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -24,14 +21,6 @@ import java.util.List;
  */
 
 public class SecretaryViewController {
-
-    private UserBean userBean;
-
-    @FXML
-    private Label nameLabel;
-
-    @FXML
-    private Button exitButton;
 
     @FXML
     private TableView<IssueBean> issueTableView;
@@ -56,27 +45,14 @@ public class SecretaryViewController {
     @FXML
     private void initialize() {
 
-        // set action
-        exitButton.setOnAction(this::exitButtonAction);
-
         // Listen for selection changes and show the person details when changed.
-        //issueTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showIssueDetails(newValue));
-    }
-
-    private void showIssueDetails(Issue issue) {
-
-
+        issueTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showIssueDetails(newValue));
     }
 
     /**
      *
-     * @param userBean userBean
      */
-    public void onCreateView(UserBean userBean) {
-
-        // set user name on the top of the view
-        this.userBean = userBean;
-        nameLabel.setText("Benvenuto " + userBean.getName());
+    public void onCreateView() {
 
         IssueManagementController controller = new IssueManagementController();
 
@@ -100,13 +76,11 @@ public class SecretaryViewController {
     }
 
     /**
-     * Exit/logout button action
      *
-     * @param event JavaFX event
+     * @param issueBean
      */
-    private void exitButtonAction(ActionEvent event) {
+    public void showIssueDetails(IssueBean issueBean){
 
-        SceneManager sm = SceneManager.getSingletonInstance();
-        sm.showLoginView();
+        SceneManager.getSingletonInstance().showSecretaryDetailView(issueBean);
     }
 }

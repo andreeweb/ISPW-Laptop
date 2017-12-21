@@ -106,4 +106,17 @@ public class IssueBean {
     public void setClassroom(ClassroomBean classroom) {
         this.classroom = classroom;
     }
+
+
+    @Override
+    public String toString() {
+        return "IssueBean{" +
+                "issueId=" + issueId +
+                ", description='" + description + '\'' +
+                ", state=" + state +
+                ", date='" + date + '\'' +
+                ", feature=" + feature +
+                ", classroom=" + classroom +
+                '}';
+    }
 }

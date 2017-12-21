@@ -32,8 +32,6 @@ public class DaoFactory {
         switch (type) {
 
             case PostgreSQL: return new PGUserDao();
-            case File: return new FileUserDao();
-            case MySQL: return new MySqlUserDao();
             default: throw new DaoException("Invalid type : " + type);
 
         }
