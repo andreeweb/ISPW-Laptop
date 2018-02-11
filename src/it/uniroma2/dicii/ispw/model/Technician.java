@@ -5,6 +5,6 @@ package it.uniroma2.dicii.ispw.model;
  *
  * @author Andrea Cerra
  */
-public class Technician {
+public class Technician extends User{
 
 }

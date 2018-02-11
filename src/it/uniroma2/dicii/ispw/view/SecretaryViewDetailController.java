@@ -4,15 +4,16 @@ import it.uniroma2.dicii.ispw.bean.IssueBean;
 import it.uniroma2.dicii.ispw.controller.IssueManagementController;
 import it.uniroma2.dicii.ispw.enumeration.IssueState;
 import it.uniroma2.dicii.ispw.exception.DaoException;
+import it.uniroma2.dicii.ispw.model.Issue;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
+import java.util.Date;
 import java.util.List;
 
 public class SecretaryViewDetailController {
@@ -35,7 +36,20 @@ public class SecretaryViewDetailController {
     @FXML
     private Button discardButton;
 
-    private ObservableList<IssueState> issueStates = FXCollections.observableArrayList();
+    @FXML
+    private TableView<IssueBean> storyTableView;
+
+    @FXML
+    private TableColumn<IssueBean, String> storyTableStateColumn;
+
+    @FXML
+    private TableColumn<IssueBean, String> storyTableDataColumn;
+
+    private ObservableList<IssueState> states = FXCollections.observableArrayList();
+
+    private ObservableList<IssueBean> issueStates = FXCollections.observableArrayList();
+
+    private IssueBean bean;
 
     @FXML
     private void initialize() {
@@ -45,11 +59,29 @@ public class SecretaryViewDetailController {
     }
 
     private void discardButtonAction(ActionEvent actionEvent) {
-
+        SceneManager.getSingletonInstance().showSecretaryView();
     }
 
     private void confirmButtonAction(ActionEvent actionEvent) {
 
+        IssueManagementController controller = new IssueManagementController();
+
+        IssueBean bean = new IssueBean();
+        bean.setId(this.bean.getFeature().getId());
+        bean.setDescription(descriptionTextArea.getText());
+        bean.setState(IssueState.valueOf(statusCombo.getSelectionModel().getSelectedItem().toString()));
+
+        try {
+
+            controller.updateIssue(bean);
+            SceneManager.getSingletonInstance().showSecretaryView();
+
+        } catch (DaoException e) {
+            e.printStackTrace();
+
+            // Show allert!
+            // TODO
+        }
     }
 
     /**
@@ -58,7 +90,7 @@ public class SecretaryViewDetailController {
      */
     public void onCreateView(IssueBean issueBean) {
 
-        System.out.println(issueBean.toString());
+        this.bean = issueBean;
 
         descriptionTextArea.setText(issueBean.getDescription());
         featureTextField.setText(issueBean.getFeature().getName());
@@ -68,15 +100,21 @@ public class SecretaryViewDetailController {
 
         try {
 
-            List<IssueState> list = controller.getIssueStateList();
+            List<IssueState> list = controller.getStateList();
+            states.addAll(list);
+            statusCombo.setItems(states);
 
-            issueStates.addAll(list);
-            statusCombo.setItems(issueStates);
+            List<IssueBean> listBean = controller.getStateListForIssue(issueBean);
+            issueStates.addAll(listBean);
+            storyTableView.setItems(issueStates);
 
         } catch (DaoException e) {
             e.printStackTrace();
             // todo no data available
         }
+
+        storyTableStateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getState().toString()));
+        storyTableDataColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
     }
 
 }

@@ -17,8 +17,6 @@ import it.uniroma2.dicii.ispw.utils.Sha;
 
 public class LoginController {
 
-    // todo questo controller non fa la new dell'user, rivedere diagramma classi con associazione
-
     /**
      * Passing a UserBean, this method takes care of
      * validating the username and password received from the boundary.

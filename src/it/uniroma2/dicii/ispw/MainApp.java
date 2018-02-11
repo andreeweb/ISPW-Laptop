@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw;
 
+import it.uniroma2.dicii.ispw.thread.RunnableThread;
+import it.uniroma2.dicii.ispw.thread.SimpleThread;
 import it.uniroma2.dicii.ispw.view.SceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +47,15 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) throws IOException {
+
+        /*System.out.println("Start thread, see MainApp");
+
+        SimpleThread thread = new SimpleThread();
+        thread.start();
+
+        Thread t = new Thread(new RunnableThread());
+        t.start();*/
+
         launch(args);
     }
 }

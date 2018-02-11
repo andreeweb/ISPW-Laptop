@@ -22,9 +22,27 @@ public interface IssueDao {
     List<Issue> getIssues() throws DaoException;
 
     /**
+     * Get all possibile state for issue from db
      *
-     * @return array
-     * @throws DaoException
+     * @return List contains Issue State
+     * @throws DaoException error in db
+     * @see IssueState
      */
-    List<IssueState> getIssueStates() throws DaoException;
+    List<IssueState> getStates() throws DaoException;
+
+    /**
+     * Get all issue state with data
+     *
+     * @return List contains Issue Object with field state and data
+     * @throws DaoException error in db
+     */
+    List<Issue> getIssueStateStory(Issue issue) throws DaoException;
+
+    /**
+     * Update issue data on db
+     *
+     * @param issue to update
+     * @throws DaoException error in db
+     */
+    void updateIssue(Issue issue) throws DaoException;
 }
