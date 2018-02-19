@@ -4,9 +4,8 @@ public enum IssueState {
     NEW,
     CONFIRMED,
     CANCELED,
-    RESOLVED,
     TAKEN,
-    REPAIR,
+    REPAIRING,
     TESTING,
     REJECTED,
     REPAIRED

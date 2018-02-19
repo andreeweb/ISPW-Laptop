@@ -8,6 +8,7 @@ import it.uniroma2.dicii.ispw.model.Feature;
 import it.uniroma2.dicii.ispw.model.Issue;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +37,18 @@ public class PGIssueDao implements IssueDao {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             // query
-            String sql = "SELECT issue.issue_id, issue.description, issue.state, classroom.classroom_id, " +
+            String sql = "SELECT DISTINCT ON(concrete_feature.feature_id) concrete_feature.feature_id AS concrete_id, " +
+                    "issue.issue_id, " +
+                    "issue.description, " +
+                    "issue.state, " +
+                    "classroom.classroom_id, " +
                     "classroom.name AS classroom_name, " +
                     "abstract_feature.name AS feature_name, " +
-                    "abstract_feature.feature_id AS feature_id, " +
-                    "concrete_feature.feature_id AS concrete_id " +
-                    "FROM issue " +
-                    "JOIN concrete_feature ON (issue.concrete_feature = concrete_feature.classroom_id) " +
+                    "abstract_feature.feature_id AS feature_id FROM issue " +
+                    "JOIN concrete_feature ON (issue.concrete_feature = concrete_feature.feature_id) " +
                     "JOIN classroom ON (concrete_feature.classroom_id = classroom.classroom_id) " +
-                    "JOIN abstract_feature ON (concrete_feature.abstract_id = abstract_feature.feature_id);";
+                    "JOIN abstract_feature ON (concrete_feature.abstract_id = abstract_feature.feature_id) " +
+                    "ORDER BY concrete_feature.feature_id, data desc;";
 
             // execute
             ResultSet rs = stmt.executeQuery(sql);
@@ -107,68 +111,6 @@ public class PGIssueDao implements IssueDao {
     }
 
     @Override
-    public List<IssueState> getStates() throws DaoException{
-
-        List<IssueState> list = new ArrayList<IssueState>();
-
-        Statement stmt = null;
-        Connection conn = null;
-
-        try {
-
-            // get connection
-            Class.forName(DRIVER_CLASS_NAME);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            // create statement
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
-            // query
-            String sql = "SELECT * FROM fault_state;";
-
-            // execute
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while(rs.next()) {
-
-                // read data
-                list.add(IssueState.valueOf(rs.getString("type")));
-            }
-
-            // Clean-up
-            rs.close();
-            stmt.close();
-            conn.close();
-
-        } catch (ClassNotFoundException e) {
-
-            // driver not found, go out
-            e.printStackTrace();
-            System.exit(1);
-
-        } catch (SQLException e) {
-            throw new DaoException(e.getMessage());
-
-        } finally {
-
-            try {
-
-                if (stmt != null)
-                    stmt.close();
-
-                if (conn != null)
-                    conn.close();
-
-            } catch (SQLException e) {
-                throw new DaoException(e.getMessage());
-            }
-        }
-
-        return list;
-
-    }
-
-    @Override
     public List<Issue> getIssueStateStory(Issue issue) throws DaoException {
 
         List<Issue> list = new ArrayList<Issue>();
@@ -189,7 +131,7 @@ public class PGIssueDao implements IssueDao {
             String sql = "SELECT concrete_feature.feature_id " +
                     "AS concrete_id, issue.state, issue.data AS date_state " +
                     "FROM issue " +
-                    "JOIN concrete_feature ON (issue.concrete_feature = concrete_feature.classroom_id) " +
+                    "JOIN concrete_feature ON (issue.concrete_feature = concrete_feature.feature_id) " +
                     "JOIN classroom ON (concrete_feature.classroom_id = classroom.classroom_id) " +
                     "JOIN abstract_feature ON (concrete_feature.abstract_id = abstract_feature.feature_id) " +
                     "WHERE concrete_feature.feature_id = " + issue.getFeature().getId() +
@@ -203,7 +145,7 @@ public class PGIssueDao implements IssueDao {
                 // read data
                 Issue is = new Issue();
                 is.setState(IssueState.valueOf(rs.getString("state")));
-                is.setDate(rs.getString("date_state"));
+                is.setDate(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(rs.getTimestamp("date_state")));
 
                 list.add(is);
             }
@@ -257,7 +199,7 @@ public class PGIssueDao implements IssueDao {
 
             // query
             String sql = "INSERT INTO issue (description, concrete_feature, state, data) " +
-                    "VALUES ('" + issue.getDescription() + "'," + issue.getId() + ", '" + issue.getState() + "', '" + new Date(System.currentTimeMillis()) + "');";
+                    "VALUES ('" + issue.getDescription() + "'," + issue.getFeature().getId() + ", '" + issue.getState() + "', now());";
 
             System.out.println(sql);
 

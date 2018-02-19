@@ -61,15 +61,38 @@ public class IssueManagementController {
     }
 
     /**
-     * Get all issue state from database
+     * Get all possible issue state, based on user role and issue story.
      *
      * @return issue state list
      * @throws DaoException error in db
      */
-    public List<IssueState> getStateList() throws DaoException {
+    public List<IssueState> getPossibleStateListForIssue(IssueBean issueBean) throws DaoException {
 
-        IssueDao dao = DaoFactory.getSingletonInstance().getIssueDAO(Persistence.PostgreSQL);
-        return dao.getStates();
+        List<IssueState> list = new ArrayList<IssueState>();
+
+        switch (issueBean.getState()){
+
+            case NEW:
+                list.add(IssueState.CONFIRMED);
+                list.add(IssueState.CANCELED);
+                break;
+
+            case REJECTED:
+                break;
+
+            case REPAIRED:
+                break;
+
+            default:
+                list.add(IssueState.CANCELED);
+                break;
+        }
+
+        for (IssueBean iBean : this.getStateStoryListForIssue(issueBean)) {
+            list.remove(iBean.getState());
+        }
+
+        return list;
 
     }
 
@@ -84,9 +107,13 @@ public class IssueManagementController {
         IssueDao dao = DaoFactory.getSingletonInstance().getIssueDAO(Persistence.PostgreSQL);
 
         Issue issue = new Issue();
-        issue.setId(bean.getId());
         issue.setDescription(bean.getDescription());
         issue.setState(bean.getState());
+
+        Feature feature = new Feature();
+        feature.setId(bean.getFeature().getId());
+
+        issue.setFeature(feature);
 
         dao.updateIssue(issue);
     }
@@ -98,7 +125,7 @@ public class IssueManagementController {
      * @return issuebean contains only state and date
      * @throws DaoException error in db
      */
-    public List<IssueBean> getStateListForIssue(IssueBean issueBean) throws DaoException {
+    public List<IssueBean> getStateStoryListForIssue(IssueBean issueBean) throws DaoException {
 
         IssueDao dao = DaoFactory.getSingletonInstance().getIssueDAO(Persistence.PostgreSQL);
 

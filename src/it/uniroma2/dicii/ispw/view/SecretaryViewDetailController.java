@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.view;
 
+import it.uniroma2.dicii.ispw.bean.FeatureBean;
 import it.uniroma2.dicii.ispw.bean.IssueBean;
 import it.uniroma2.dicii.ispw.controller.IssueManagementController;
 import it.uniroma2.dicii.ispw.enumeration.IssueState;
@@ -67,9 +68,13 @@ public class SecretaryViewDetailController {
         IssueManagementController controller = new IssueManagementController();
 
         IssueBean bean = new IssueBean();
-        bean.setId(this.bean.getFeature().getId());
         bean.setDescription(descriptionTextArea.getText());
         bean.setState(IssueState.valueOf(statusCombo.getSelectionModel().getSelectedItem().toString()));
+
+        FeatureBean featureBean = new FeatureBean();
+        featureBean.setId(this.bean.getFeature().getId());
+
+        bean.setFeature(featureBean);
 
         try {
 
@@ -77,6 +82,7 @@ public class SecretaryViewDetailController {
             SceneManager.getSingletonInstance().showSecretaryView();
 
         } catch (DaoException e) {
+
             e.printStackTrace();
 
             // Show allert!
@@ -100,11 +106,11 @@ public class SecretaryViewDetailController {
 
         try {
 
-            List<IssueState> list = controller.getStateList();
+            List<IssueState> list = controller.getPossibleStateListForIssue(issueBean);
             states.addAll(list);
             statusCombo.setItems(states);
 
-            List<IssueBean> listBean = controller.getStateListForIssue(issueBean);
+            List<IssueBean> listBean = controller.getStateStoryListForIssue(issueBean);
             issueStates.addAll(listBean);
             storyTableView.setItems(issueStates);
 

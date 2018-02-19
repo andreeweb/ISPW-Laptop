@@ -50,9 +50,7 @@ public class FileUserDao implements UserDao{
             throw new DaoException(e.getMessage());
         }
 
-        if (user == null)
-            throw new DaoException("User not found");
-
-        return null;
+        // if reach this line user was not found
+        throw new DaoException("User not found");
     }
 }
