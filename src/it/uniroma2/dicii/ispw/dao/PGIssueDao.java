@@ -75,8 +75,6 @@ public class PGIssueDao implements IssueDao {
                 list.add(issue);
             }
 
-            System.out.println("Found " + list.size() + " issue in db");
-
             // Clean-up
             rs.close();
             stmt.close();
@@ -200,8 +198,6 @@ public class PGIssueDao implements IssueDao {
             // query
             String sql = "INSERT INTO issue (description, concrete_feature, state, data) " +
                     "VALUES ('" + issue.getDescription() + "'," + issue.getFeature().getId() + ", '" + issue.getState() + "', now());";
-
-            System.out.println(sql);
 
             // execute
             stmt.executeUpdate(sql);

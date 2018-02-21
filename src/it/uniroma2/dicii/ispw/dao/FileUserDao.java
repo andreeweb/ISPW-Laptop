@@ -37,8 +37,6 @@ public class FileUserDao implements UserDao{
                 user = list.get(i);
 
                 if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPassword(), password)){
-
-                    System.out.println(user.toString());
                     return user;
                 }
             }

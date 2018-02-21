@@ -33,8 +33,6 @@ public class LoginController {
         userBean.setName(user.getName());
         userBean.setSurname(user.getSurname());
 
-        System.out.println("User Login: " + user.toString() + " " + user.getUserRole());
-
         return userBean;
     }
 }
